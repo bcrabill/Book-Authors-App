@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, intial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>Books & Authors</title>
+      {% load static %}
+      <link rel="stylesheet" type="text/css" href="{% static 'books_authors_app/css/style.css' %}">
+      </head>
+    <body>
+        <div class=left_container>
+            <h1>Add an Author</h1>
+            <form action='/add_authors/' method='POST'>
+            First Name: <input type='text' name='first_name'>
+            
+            Last Name: <input type='text' name='last_name'>
+            Notes: <input type='text' name='notes'>
+            <input type='submit' value='Add'>
+            </form>
+        </div>
+        <div class='right_table'>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+            {% for books in Books %}
+                <tr>
+                    <td>{{Book.id}</td>
+                    <td>{Book.title}</td>
+                    <td>View</td>
+                </tr>
+            {% endfor %}
+            </table>
+
+        </div>
+
+
+    </body>

@@ -1,0 +1,54 @@
+>>> from apps.books_authors_app.models import *
+>>> sharp = Books.objects.create(title='C Sharp', description='An intro to C Sharp')
+>>> jav = Books.objects.create(title='Java', description='An into to Java')
+>>> python = Books.objects.create(title='Python', description='An into to Python')
+>>> php = Books.objects.create(title='PHP', description='An into to PHP')
+>>> ruby = Books.objects.create(title='Ruby', description='A fake book I hide chocolate in')
+
+>>> jane = Author.objects.create(first_name='Jane', last_name='Austen')
+>>> emily = Author.objects.create(first_name='Emily', last_name='Dickinson')
+>>> fyodor = Author.objects.create(first_name='Fyodor', last_name='Dostoevsky')
+>>> wiliam = Author.objects.create(first_name='William', last_name='Shakespeare')
+>>> william = Author.objects.create(first_name='William', last_name='Shakespeare')
+>>> lau = Author.objects.create(first_name='Lau', last_name='Tzu')
+
+>>> fyodor.first_name='Bill'
+>>> sharp.author_name=jane
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\Bryan\Desktop\Coding_Dojo\Python_Stack\django\django_intro\inital_project\django_first_proj\djangoPy3Env\lib\site-packag
+elated_descriptors.py", line 500, in __set__
+    manager.set(value)
+  File "C:\Users\Bryan\Desktop\Coding_Dojo\Python_Stack\django\django_intro\inital_project\django_first_proj\djangoPy3Env\lib\site-packag
+elated_descriptors.py", line 928, in set
+    objs = tuple(objs)
+TypeError: 'Author' object is not iterable
+>>> jane.books.add(sharp)
+>>> jane.books.all()
+<QuerySet [Book: C Sharp - An intro to c sharp]>
+>>> jane.books.add(java)
+>>> emily.books.add(java, python, php)
+>>> emily.books.all()
+<QuerySet [Book: Java - An intro to Java, Book: Python - An intro to Python, Book: PHP - An intro to PHP]>
+>>> fyodor.books.add(sharp, java, python, php)
+>>> william.books.add(sharp, java, python, php, ruby)
+>>> python.author_name.all()
+<QuerySet [Author: Emily Dickinson, Author: Fyodor Dostoevsky, Author: William Shakespeare]>
+>>> third = python.author_name.get(id=12)
+>>> third
+Author: William Shakespeare
+>>> python.author_name.remove(third)
+>>> fifth= Author.objects.get(id=5)
+>>> fifth
+Author: William Shakespeare
+>>> java.author_name.add(fifth)
+>>> java.author_name.all()
+<QuerySet [Author: Jane Austen, Author: Emily Dickinson, Author: Fyodor Dostoevsky, Author: William Shakespeare, Author: William Shakespeare]>
+>>> Author.objects.get(id=3)
+Author: Emily Dickinson
+
+>>> third_author = Book.objects.get(id=3)
+>>> third_author
+Book: C Sharp - An intro series into C Sharp
+>>> Author.objects.get(books=ruby)
+Author: William Shakespeare
